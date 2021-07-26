@@ -13,13 +13,18 @@ def get_firebase_user_uid(firebase_user: auth.UserRecord) -> str:
         raise Exception(e)
 
 
-def get_firebase_user_email(firebase_user: auth.UserRecord) -> str:
+def get_firebase_user_identifier(firebase_user: auth.UserRecord) -> str:
     try:
-        return (
-            firebase_user.email
-            if firebase_user.email
-            else firebase_user.provider_data[0].email
-        )
+        if firebase_user.email:
+            return firebase_user.email
+        elif firebase_user.provider_data[0].email:
+            return firebase_user.provider_data[0].email
+        elif firebase_user.phone_number:
+            return firebase_user.phone_number
+        elif firebase_user.provider_data[0].phone_number:
+            return firebase_user.provider_data[0].phone_number
+        else:
+            raise Exception("Identifier not found.")
     except Exception as e:
         raise Exception(e)
 
