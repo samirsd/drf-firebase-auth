@@ -103,7 +103,7 @@ class FirebaseAuthentication(authentication.TokenAuthentication):
         log.info(f'_get_or_create_local_user - identifier: {identifier}')
         user = None
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(username=uid)
             log.info(
                 f'_get_or_create_local_user - user.is_active: {user.is_active}'
             )
@@ -126,7 +126,7 @@ class FirebaseAuthentication(authentication.TokenAuthentication):
             )
             try:
                 user = User.objects.create_user(
-                    username=username,
+                    username=uid,
                     email=email
                 )
                 user.last_login = timezone.now()
