@@ -22,7 +22,7 @@ from .models import (
     FirebaseUser,
     FirebaseUserProvider
 )
-from .utils import get_firebase_user_identifier
+from .utils import get_firebase_user_uid, get_firebase_user_identifier
 from . import __title__
 
 log = logging.getLogger(__title__)
@@ -100,7 +100,7 @@ class FirebaseAuthentication(authentication.TokenAuthentication):
         """
         uid = get_firebase_user_uid(firebase_user)
         identifier = get_firebase_user_identifier(firebase_user)
-        log.info(f'_get_or_create_local_user - identifier: {identifier}')
+        log.info(f'_get_or_create_local_user - email: {identifier}')
         user = None
         try:
             user = User.objects.get(username=uid)
@@ -122,7 +122,7 @@ class FirebaseAuthentication(authentication.TokenAuthentication):
             username = \
                 api_settings.FIREBASE_USERNAME_MAPPING_FUNC(firebase_user)
             log.info(
-                f'_get_or_create_local_user - username: {username}'
+                f'_get_or_create_local_user - username: {uid}'
             )
             try:
                 user = User.objects.create_user(
