@@ -98,8 +98,9 @@ class FirebaseAuthentication(authentication.TokenAuthentication):
         """
         Attempts to return or create a local User from Firebase user data
         """
-        email = get_firebase_user_identifier(firebase_user)
-        log.info(f'_get_or_create_local_user - email: {email}')
+        uid = get_firebase_user_uid(firebase_user)
+        identifier = get_firebase_user_identifier(firebase_user)
+        log.info(f'_get_or_create_local_user - identifier: {identifier}')
         user = None
         try:
             user = User.objects.get(email=email)
