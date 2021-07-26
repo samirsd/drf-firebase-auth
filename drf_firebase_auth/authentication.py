@@ -127,7 +127,7 @@ class FirebaseAuthentication(authentication.TokenAuthentication):
             try:
                 user = User.objects.create_user(
                     username=uid,
-                    email=email
+                    email=identifier
                 )
                 user.last_login = timezone.now()
                 if (
