@@ -84,6 +84,8 @@ JWT <token>
 
 Voila!
 
+If you want to understand how providers linking and phone logins occur in this version; check out our <a href="https://github.com/agence-courrier/drf-firebase-auth/wiki">wiki</a>!
+
 ## Contributing
 
 * Trello board created! Please follow this link if you wish to collabrate in the future direction of this package: https://trello.com/invite/b/lkAsvStS/af54d9a94359c042f3bd9afb47f82eab/drf-firebase-auth
