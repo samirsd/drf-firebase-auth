@@ -8,7 +8,6 @@
 * Django Rest Framework
 
 
-
 ## Installation
 
 ```
@@ -92,3 +91,8 @@ If you want to understand how providers linking and phone logins occur in this v
 * Please raise an issue/feature and name your branch 'feature-n' or 'issue-n', where 'n' is the issue number.
 * If you test this code with a Python version not listed above and all is well, please fork and update the README to include the Python version you used :)
 * I almost always setup Django with a custom user class inheriting from AbstractUser, where I switch the USERNAME_FIELD to be 'email'. This backend is setup to assign a username still anyway, but if there are any issues, please raise them and/or make a pull request to help the community!
+
+## Built with
+***
+
+<img src="https://firebase.google.com/downloads/brand-guidelines/PNG/logo-built_black.png" height="100 px"></img>    <img src="https://soshace.com/wp-content/uploads/2021/01/879-png-3.png" height="100 px"></img>
