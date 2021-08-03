@@ -11,7 +11,7 @@
 ## Installation
 
 ```
-$ pip install drf-firebase-auth
+$ pip install git+git://github.com/agence-courrier/drf-firebase-auth.git@4efdf9899dd73c7ab2263bd7c469180cd36c242b
 ```
 
 Add the application to your project's `INSTALLED_APPS` in `settings.py`.
