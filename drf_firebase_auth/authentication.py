@@ -32,7 +32,7 @@ firebase_credentials = firebase_admin.credentials.Certificate(
     api_settings.FIREBASE_SERVICE_ACCOUNT_KEY
 )
 firebase = firebase_admin.initialize_app(
-    credential=firebase_credentials,
+    firebase_credentials, api_settings.STORAGE_BUCKET
 )
 
 
