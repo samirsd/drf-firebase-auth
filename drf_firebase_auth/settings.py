@@ -31,6 +31,9 @@ DEFAULTS = {
     # require that firebase user.email_verified is True
     'FIREBASE_AUTH_EMAIL_VERIFICATION':
         os.getenv('FIREBASE_AUTH_EMAIL_VERIFICATION', False),
+    # optional: used for storage bucket app
+    'STORAGE_BUCKET': 
+        os.getenv('STORAGE_BUCKET', ''),
     # function should accept firebase_admin.auth.UserRecord as argument
     # and return str
     'FIREBASE_USERNAME_MAPPING_FUNC': map_firebase_uid_to_username
