@@ -99,10 +99,11 @@ class FirebaseAuthentication(authentication.TokenAuthentication):
         """
         uid = get_firebase_user_uid(firebase_user)
         identifier = get_firebase_user_identifier(firebase_user)
+        # email = get_firebase_user_email(firebase_user)
         log.info(f'_get_or_create_local_user - email: {identifier}')
         user = None
         try:
-            user = User.objects.get(username=uid)
+            user = User.objects.get(email=identifier)
             log.info(
                 f'_get_or_create_local_user - user.is_active: {user.is_active}'
             )

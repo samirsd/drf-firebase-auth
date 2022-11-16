@@ -13,10 +13,20 @@ def get_firebase_user_uid(firebase_user: auth.UserRecord) -> str:
         raise Exception(e)
 
 
+# def update_email(uid: str, email: str) -> Any:
+#     user = auth.update_user(
+#         uid,
+#         email=email,
+#     )
+#     return user
+
+
 def get_firebase_user_identifier(firebase_user: auth.UserRecord) -> str:
     try:
         if firebase_user.email:
             return firebase_user.email
+        elif firebase_user.uid:
+            return firebase_user.uid
         elif firebase_user.provider_data[0].email:
             return firebase_user.provider_data[0].email
         elif firebase_user.phone_number:
