@@ -8,11 +8,10 @@
 * Django Rest Framework
 
 
-
 ## Installation
 
 ```
-$ pip install drf-firebase-auth
+$ pip install git+git://github.com/agence-courrier/drf-firebase-auth.git@4efdf9899dd73c7ab2263bd7c469180cd36c242b
 ```
 
 Add the application to your project's `INSTALLED_APPS` in `settings.py`.
@@ -65,66 +64,10 @@ DRF_FIREBASE_AUTH = {
     # require that firebase user.email_verified is True
     'FIREBASE_AUTH_EMAIL_VERIFICATION':
         os.getenv('FIREBASE_AUTH_EMAIL_VERIFICATION', False),
-    # function should accept firebase_admin.auth.UserRecord as argument
-    # and return str
-    'FIREBASE_USERNAME_MAPPING_FUNC': map_firebase_uid_to_username
 }
 ```
 
 You can get away with leaving all the settings as default except for `FIREBASE_SERVICE_ACCOUNT_KEY`, which is obviously required.
-
-NOTE: `FIREBASE_USERNAME_MAPPING_FUNC` will replace behaviour in version < 1 as default (formerly provided by logic in `map_firebase_to_username_legacy`, described below). One can simply switch out this function.
-
-`drf_firebase_auth.utils` contains functions for mapping firebase user info to the Django username field (new in version >= 1). Any custom function can be supplied here, as long as it accepts a `firebase_admin.auth.UserRecord` argument. The supplied functions are common use-cases:
-
-```python
-def map_firebase_to_username_legacy(firebase_user: auth.UserRecord) -> str:
-    try:
-        username = '_'.join(
-            firebase_user.display_name.split(' ')
-            if firebase_user.display_name
-            else str(uuid.uuid4())
-        )
-        return username if len(username) <= 30 else username[:30]
-    except Exception as e:
-        raise Exception(e)
-
-
-def map_firebase_display_name_to_username(
-    firebase_user: auth.UserRecord
-) -> str:
-    try:
-        return '_'.join(firebase_user.display_name.split(' '))
-    except Exception as e:
-        raise Exception(e)
-
-
-def map_firebase_uid_to_username(
-    firebase_user: auth.UserRecord
-) -> str:
-    try:
-        return firebase_user.uid
-    except Exception as e:
-        raise Exception(e)
-
-
-def map_firebase_email_to_username(
-    firebase_user: auth.UserRecord
-) -> str:
-    try:
-        return get_firebase_user_email(firebase_user)
-    except Exception as e:
-        raise Exception(e)
-
-
-def map_uuid_to_username(
-    _: auth.UserRecord
-) -> str:
-    try:
-        return str(uuid.uuid4())
-    except Exception as e:
-        raise Exception(e)
-```
 
 Now that you have configured the application, run the migrations so that the Firebase data can be stored.
 
@@ -140,9 +83,16 @@ JWT <token>
 
 Voila!
 
+If you want to understand how providers linking and phone logins occur in this version; check out our <a href="https://github.com/agence-courrier/drf-firebase-auth/wiki">wiki</a>!
+
 ## Contributing
 
 * Trello board created! Please follow this link if you wish to collabrate in the future direction of this package: https://trello.com/invite/b/lkAsvStS/af54d9a94359c042f3bd9afb47f82eab/drf-firebase-auth
 * Please raise an issue/feature and name your branch 'feature-n' or 'issue-n', where 'n' is the issue number.
 * If you test this code with a Python version not listed above and all is well, please fork and update the README to include the Python version you used :)
 * I almost always setup Django with a custom user class inheriting from AbstractUser, where I switch the USERNAME_FIELD to be 'email'. This backend is setup to assign a username still anyway, but if there are any issues, please raise them and/or make a pull request to help the community!
+
+## Built with
+***
+
+<img src="https://firebase.google.com/downloads/brand-guidelines/PNG/logo-built_black.png" height="100 px"></img>    <img src="https://soshace.com/wp-content/uploads/2021/01/879-png-3.png" height="100 px"></img>
